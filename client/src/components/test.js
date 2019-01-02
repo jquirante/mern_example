@@ -12,13 +12,14 @@ class Test extends Component {
         const postResponse = await axios.post('/api/send-message', message);
 
         console.log('Post Response: ', postResponse);
-        // const response = await axios.get('/api/test');
-
-        // console.log('Test Reponse: ', response);
-
-        // const user = await axios.get('/api/user');
         
-        // console.log('User Response: ', user);
+        const response = await axios.get('/api/test');
+
+        console.log('Test Reponse: ', response);
+
+        const user = await axios.get('/api/user');
+        
+        console.log('User Response: ', user);
     }
     render() {
         return(
