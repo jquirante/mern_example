@@ -1,16 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const PORT = process.env.PORT || 9000;
+const { resolve } = require('path');
 
 const app = express();
 
 app.use(cors()); // Sets headers to * to allow backend and front end to communicate
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-
-app.get('/', (request, response) => {
-    response.send('<h1>The server is working!</h1>')
-})
+app.use(express.static( resolve( __dirname, 'client', 'dist') ));
 
 app.get('/api/test', (request, response) => {
     const data = {
@@ -39,6 +37,10 @@ app.post('/api/send-message', (request, response) => {
         success: true,
         dataReceived: request.body,
     })
+});
+
+app.get('*', (request, response) => {
+    response.sendFile(resolve( __dirname, 'client', 'dist', 'index.html' ));
 });
 
 app.listen(PORT, () => {
